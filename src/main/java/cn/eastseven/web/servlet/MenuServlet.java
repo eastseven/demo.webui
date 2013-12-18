@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -76,7 +78,7 @@ public class MenuServlet extends HttpServlet {
 		try {
 			
 			pst = conn.prepareStatement(sql);
-			rs = pst.executeQuery();
+			rs  = pst.executeQuery();
 			
 			while(rs.next()) {
 				Menu menu = new Menu();
@@ -84,9 +86,11 @@ public class MenuServlet extends HttpServlet {
 				menu.setPid(rs.getInt("menu_pid"));
 				menu.setText(rs.getString("menu_name"));
 				menu.setLevel(rs.getInt("menu_level"));
+				menu.setUrl(rs.getString("menu_url"));
 				if(menu.isLeaf()) {
 					menu.setState("undefined");
 				}
+				menu.getAttributes().put("url", menu.getUrl());
 				result.add(menu);
 			}
 		
@@ -107,11 +111,14 @@ public class MenuServlet extends HttpServlet {
 		private int id;
 		private int pid;
 		private int level;
-		private String text = "";
-		private String state = "closed";
-		private boolean checked = false;
-		//private boolean leaf = false;
+		
+		private String url          = "";
+		private String text         = "";
+		private String state        = "closed";
+		private boolean checked     = false;
 		private List<Menu> children = new ArrayList<MenuServlet.Menu>();
+		
+		private Map<String, String> attributes = new HashMap<String, String>();
 		
 		public int getId() {
 			return id;
@@ -160,6 +167,18 @@ public class MenuServlet extends HttpServlet {
 		}
 		public boolean isLeaf() {
 			return this.level == 3;
+		}
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		public String getUrl() {
+			return url;
+		}
+		public Map<String, String> getAttributes() {
+			return attributes;
+		}
+		public void setAttributes(Map<String, String> attributes) {
+			this.attributes = attributes;
 		}
 	}
 }

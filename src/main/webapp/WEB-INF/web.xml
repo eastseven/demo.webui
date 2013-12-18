@@ -3,18 +3,27 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-	<display-name>Archetype Created Web Application</display-name>
+	<display-name>web</display-name>
 	<servlet>
 		<servlet-name>IndexServlet</servlet-name>
 		<display-name>IndexServlet</display-name>
-		<description></description>
 		<servlet-class>cn.eastseven.web.servlet.IndexServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>MenuServlet</servlet-name>
 		<display-name>MenuServlet</display-name>
-		<description></description>
 		<servlet-class>cn.eastseven.web.servlet.MenuServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>QuartzServlet</servlet-name>
+		<display-name>QuartzServlet</display-name>
+		<servlet-class>cn.eastseven.web.servlet.QuartzServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>InitServlet</servlet-name>
+		<display-name>InitServlet</display-name>
+		<servlet-class>cn.eastseven.web.servlet.InitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>IndexServlet</servlet-name>
@@ -24,8 +33,16 @@
 		<servlet-name>MenuServlet</servlet-name>
 		<url-pattern>/jdmenu</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QuartzServlet</servlet-name>
+		<url-pattern>/quartz</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InitServlet</servlet-name>
+		<url-pattern>/InitServlet</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>index2.html</welcome-file>
 		<welcome-file>index.html</welcome-file>
+		<welcome-file>index2.html</welcome-file>
 	</welcome-file-list>
 </web-app>

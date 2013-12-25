@@ -1,12 +1,12 @@
 $(document).ready(function() {
 	var triggerColumns = [[
-	                       {field:'name', title:'name',align:'center',sortable:true,fixed:true,width:100,checkbox:false},
-	                       {field:'group', title:'group',align:'center',sortable:true,fixed:true,width:100},
-	                       {field:'fullName', title:'fullName',align:'center',sortable:true,fixed:true,width:100},
-	                       {field:'jobName', title:'jobName',align:'center',sortable:true,fixed:true,width:100},
-	                       {field:'jobGroup', title:'jobGroup',align:'center',sortable:true,fixed:true,width:100},
-	                       {field:'fullJobName', title:'fullJobName',align:'center',sortable:true,fixed:true,width:100},
-	                       {field:'startTime', title:'startTime',align:'center',sortable:true,fixed:true,width:150, 
+	                       {field:'name', title:'name',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100,checkbox:false},
+	                       {field:'group', title:'group',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100},
+	                       {field:'fullName', title:'fullName',align:'center',hidden:false,sortable:true,resizable:true,fixed:true,width:200},
+	                       {field:'jobName', title:'jobName',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100},
+	                       {field:'jobGroup', title:'jobGroup',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100},
+	                       {field:'fullJobName', title:'fullJobName',align:'center',hidden:false,sortable:true,resizable:true,fixed:true,width:200},
+	                       {field:'startTime', title:'startTime',align:'center',hidden:false,sortable:true,resizable:true,fixed:true,width:200, 
 	                    	   formatter : function(value,row,index) {
 	                    		   var date = new Date();
 	                    		   date.setTime(value);
@@ -14,7 +14,7 @@ $(document).ready(function() {
 	                    		   return date;
 	                    	   }
 	                       },
-	                       {field:'nextFireTime', title:'nextFireTime',align:'center',sortable:true,fixed:true,width:150,
+	                       {field:'nextFireTime', title:'nextFireTime',align:'center',hidden:false,sortable:true,resizable:true,fixed:true,width:200,
 	                    	   formatter : function(value, row, index) {
 	                    		   var date = new Date();
 	                    		   date.setTime(value);
@@ -22,7 +22,7 @@ $(document).ready(function() {
 	                    		   return date;
 	                    	   }
 	                       },
-	                       {field:'cronExpression',title:'cronExpression',align:'center',sortable:true,fixed:true,width:100}
+	                       {field:'cronExpression',title:'cronExpression',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100}
 	        	    ]];
 	$('#trigger').datagrid({
 		url          : './quartz?m=index',
@@ -35,7 +35,20 @@ $(document).ready(function() {
 	   	pagination   : true,
 	   	idField      : 'fullName',
 	    pagePosition : 'bottom',
+	    toolbar      : '#triggerToolbar',
 	    loadMsg      : '努力加载中。。。'
+	});
+	
+	$('#triggerAddBtn').bind('click', function() {
+		$('#dlg').dialog('open');
+	});
+	
+	$('#triggerEditBtn').bind('click', function() {
+		console.log('trigger edit');
+	});
+	
+	$('#triggerRemoveBtn').bind('click', function() {
+		console.log('trigger remove');
 	});
 	
 	var tree = $('#tt2').tree({

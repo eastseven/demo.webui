@@ -90,7 +90,7 @@ public class MenuServlet extends HttpServlet {
 				if(menu.isLeaf()) {
 					menu.setState("undefined");
 				}
-				menu.getAttributes().put("url", menu.getUrl());
+				menu.getAttributes().put("url", rs.getString("menu_url"));
 				result.add(menu);
 			}
 		

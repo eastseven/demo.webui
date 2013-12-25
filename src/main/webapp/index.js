@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	var triggerColumns = [[
 	                       {field:'name', title:'name',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100,checkbox:false},
 	                       {field:'group', title:'group',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100},
@@ -61,7 +62,15 @@ $(document).ready(function() {
 		    });
 		},
 		onBeforeSelect : function(node) {
-			console.log('beforeSelect: ', node.url);
+			console.log('beforeSelect: ', node.attributes.url);
+			
+			$('#tt').tabs('add', {
+				//id : node.attrubutes.url,
+				title : node.text,
+				selected : true,
+				closable : true,
+				content : node.text
+			});
 		}
 	});
 	

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+	//TODO Quartz Trigger Grid
 	var triggerColumns = [[
 	                       {field:'name', title:'name',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100,checkbox:false},
 	                       {field:'group', title:'group',align:'center',hidden:true,sortable:true,resizable:true,fixed:true,width:100},
@@ -52,6 +52,7 @@ $(document).ready(function() {
 		console.log('trigger remove');
 	});
 	
+	//TODO Tree
 	var tree = $('#tt2').tree({
 		url : './jdmenu',
 		onBeforeExpand : function(node) {
@@ -62,18 +63,23 @@ $(document).ready(function() {
 		    });
 		},
 		onBeforeSelect : function(node) {
-			console.log('beforeSelect: ', node.attributes.url);
-			
-			$('#tt').tabs('add', {
-				//id : node.attrubutes.url,
-				title : node.text,
-				selected : true,
-				closable : true,
-				content : node.text
-			});
+			console.log('beforeSelect: ', node.id);
+			var exists = $('#tt').tabs('exists', node.id);
+			if(exists) {
+				$('#tt').tabs('select', node.id);
+			} else {
+				$('#tt').tabs('add', {
+					id : node.id,
+					title : node.text,
+					selected : true,
+					closable : true,
+					content : node.text
+				});
+			}
 		}
 	});
 	
+	//TODO Grid
 	$('#dg').datagrid({
 	    url:'./sanguozhi',
 	    columns:[[
@@ -184,4 +190,19 @@ $(document).ready(function() {
 		
 	});
 	
+	//TODO Accordion
+	$('#btn').bind('click', function() {
+		var exists = $('#tt').tabs('exists', 'Accordion');
+		if(exists) {
+			$('#tt').tabs('select', 'Accordion');
+		} else {
+			$('#tt').tabs('add', {
+				id : 'Accordion',
+				title : 'Accordion',
+				selected : true,
+				closable : true,
+				content : 'Accordion'
+			});
+		}
+	});
 });
